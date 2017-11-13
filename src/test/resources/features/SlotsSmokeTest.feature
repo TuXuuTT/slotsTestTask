@@ -3,8 +3,13 @@ Feature:
 
   Background:
     Given slots start page is opened
+    Then slot machine and Try Me button are displayed
+    And current bet by default equals 1
 
   Scenario:
+    When client clicks Spin button
+    Then slots are spinned
+#    And Total spins amount has changed if win or loose
     Then current page url has text script
 
 #  Scenario:

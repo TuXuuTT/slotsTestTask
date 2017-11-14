@@ -14,7 +14,7 @@ public class SlotsHomePageStepAsserts {
         slotsHomePage.verifySlotMachineDisplayed();
     }
 
-    @Then("^current bet by default equals (\\d+)$")
+    @Then("^current bet equals (\\d+)$")
     public void currentBetByDefaultEquals(int arg0) throws Throwable {
         Assert.assertEquals(slotsHomePage.getCurrentBet(), arg0, "Current bet is not like expected");
     }
@@ -58,5 +58,10 @@ public class SlotsHomePageStepAsserts {
     @Then("^icons change$")
     public void iconsChange() throws Throwable {
         Assert.assertNotEquals(SlotsHomePageStepDefs.beforeChanges.getIconsViewId(), SlotsHomePageStepDefs.afterChanges.getIconsViewId());
+    }
+
+    @Then("^win chart shows updated multiplies by current bet amount$")
+    public void winChartShowsUpdatedMultipliesByCurrentBetAmount() throws Throwable {
+        Assert.assertTrue(slotsHomePage.isWinChartDisplaysMultipliedWinPoints());
     }
 }

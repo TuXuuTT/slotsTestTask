@@ -36,6 +36,7 @@ public class SlotsHomePage extends BasicPage {
     public void storeSlotMachineStateSpin(SlotsMachineDTO slotsMachineDTO) {
         overallSlotMachinesContainer.setSlotMachineStateSpin(slotsMachineDTO);
     }
+
     public void storeSlotMachineStateAppearence(SlotsMachineDTO slotsMachineDTO) {
         overallSlotMachinesContainer.setSlotMachineStateAppearence(slotsMachineDTO);
     }
@@ -69,5 +70,17 @@ public class SlotsHomePage extends BasicPage {
     public void clickChangeMachine() {
         blackBarContainer.changeMachine();
         waitABit(500);
+    }
+
+    public void increaseBetByArrowNthTimes(int arg0) {
+        overallSlotMachinesContainer.increaseBetBy(arg0);
+    }
+
+    public void decreaseBetByArrowNthTimes(int arg0) {
+        overallSlotMachinesContainer.decreaseBetBy(arg0);
+    }
+
+    public boolean isWinChartDisplaysMultipliedWinPoints() {
+        return overallSlotMachinesContainer.isWinChartDisplaysMultipliedWinPoints();
     }
 }

@@ -49,4 +49,14 @@ public class SlotsHomePageStepDefs {
         slotsHomePage.clickChangeMachine();
         slotsHomePage.storeSlotMachineStateAppearence(afterChanges);
     }
+
+    @When("^client press arrow to increase bet (\\d+) times$")
+    public void clientPressArrowToIncreaseBetTimes(int arg0) throws Throwable {
+        slotsHomePage.increaseBetByArrowNthTimes(arg0);
+    }
+
+    @When("^client press arrow to decrease bet (\\d+) times$")
+    public void clientPressArrowToDecreaseBetTimes(int arg0) throws Throwable {
+        slotsHomePage.decreaseBetByArrowNthTimes(arg0);
+    }
 }

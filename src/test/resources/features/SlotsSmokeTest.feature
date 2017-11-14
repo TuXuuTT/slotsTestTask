@@ -5,7 +5,7 @@ Feature:
     Given slots start page is opened
     Then slot machine is displayed
     And Try Me button points to Spin button
-    And current bet by default equals 1
+    And current bet equals 1
 
   Scenario:
     When client clicks Spin button
@@ -29,7 +29,18 @@ Feature:
   @NewBrowser
   Scenario:
     Given slots start page is opened
-    When client
+    When client press arrow to increase bet 9 times
+    Then current bet equals 10
+    And win chart shows updated multiplies by current bet amount
+
+  Scenario:
+    When client press arrow to increase bet 2 times
+    Then current bet equals 10
+
+  Scenario:
+    When client press arrow to decrease bet 6 times
+    Then current bet equals 4
+    And win chart shows updated multiplies by current bet amount
 
 #  @NewBrowser
 #  Scenario:

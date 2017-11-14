@@ -1,33 +1,67 @@
 package pageobjects;
 
 import com.automation.businessEntities.SlotsMachineDTO;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
-import pageobjects.blockContainers.SlotsInnerContainer;
-import ru.yandex.qatools.allure.annotations.Step;
+import pageobjects.blockContainers.BlackBarContainer;
+import pageobjects.blockContainers.OverallSlotMachinesContainer;
 
 public class SlotsHomePage extends BasicPage {
 
-    @FindBy(css = "#SlotsInnerContainer")
-    private SlotsInnerContainer slotsInnerContainer;
+    @FindBy(css = "#slot_machines_container")
+    private OverallSlotMachinesContainer overallSlotMachinesContainer;
 
+    @FindBy(css = "div.black_bar")
+    private BlackBarContainer blackBarContainer;
 
-    @Step
-    public void verifyCoreElementsAreDisplayed() {
-        slotsInnerContainer.verifyCoreElementsAreDisplayed();
+    @FindBy(css = "div#SlotsOuterContainer.won")
+    private SelenideElement redWinBackgroundLabel;
+
+    private By tryMeButtonLocator = By.cssSelector("#tryMe");
+
+    public void verifySlotMachineDisplayed() {
+        overallSlotMachinesContainer.verifySlotMachineDisplayed();
     }
 
-    @Step
-    public void verifyCurrentBet(int arg0) {
-        slotsInnerContainer.verifyBet(arg0);
-
+    public int getCurrentBet() {
+        return overallSlotMachinesContainer.getCurrentBet();
     }
 
-    @Step
     public void clickSpin() {
-        slotsInnerContainer.spin();
+        overallSlotMachinesContainer.spin();
     }
 
     public void storeSlotMachineState(SlotsMachineDTO slotsMachineDTO) {
-        slotsInnerContainer.storeSlotMachineState(slotsMachineDTO);
+        overallSlotMachinesContainer.storeSlotMachineState(slotsMachineDTO);
+    }
+
+    public void verifyTryMeButtonPointsToSpinButton() {
+        overallSlotMachinesContainer.getSelf().$(tryMeButtonLocator).shouldBe(Condition.visible);
+        blackBarContainer.getSelf().$$(tryMeButtonLocator).shouldHaveSize(0);
+    }
+
+    public void verifyTryMeButtonPointsToChangeBackgroundButton() {
+        blackBarContainer.getSelf().$(tryMeButtonLocator).shouldBe(Condition.visible);
+        overallSlotMachinesContainer.getSelf().$$(tryMeButtonLocator).shouldHaveSize(0);
+
+    }
+
+    public void verifyTryMeButtonIsNotDisplayed() {
+        blackBarContainer.getSelf().$(tryMeButtonLocator).shouldNotBe(Condition.visible);
+        overallSlotMachinesContainer.getSelf().$$(tryMeButtonLocator).shouldHaveSize(0);
+    }
+
+    public void clickChangeBackground() {
+        blackBarContainer.changeBackground();
+    }
+
+    public void clickChangeIcons() {
+        blackBarContainer.changeIcons();
+    }
+
+    public void clickChangeMachine() {
+        blackBarContainer.changeMachine();
     }
 }

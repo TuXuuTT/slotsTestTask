@@ -12,6 +12,34 @@ public class SlotsMachineDTO {
 
     private List<String> reelsStates;
 
+    private String backgroundViewId;
+    private String iconsViewId;
+    private String machineViewId;
+
+    public String getBackgroundViewId() {
+        return backgroundViewId;
+    }
+
+    public void setBackgroundViewId(String backgroundView) {
+        this.backgroundViewId = backgroundView;
+    }
+
+    public String getIconsViewId() {
+        return iconsViewId;
+    }
+
+    public void setIconsViewId(String iconsViewId) {
+        this.iconsViewId = iconsViewId;
+    }
+
+    public String getMachineViewId() {
+        return machineViewId;
+    }
+
+    public void setMachineViewId(String machineViewId) {
+        this.machineViewId = machineViewId;
+    }
+
     public String getLastWin() {
         return lastWin;
     }

@@ -6,13 +6,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class SlotsMachineContainer extends ElementsContainer {
+public class SingleSlotsMachineContainer extends ElementsContainer {
 
     @FindBy(css = "#spinButton")
     public SelenideElement spinButton;
@@ -32,11 +32,11 @@ public class SlotsMachineContainer extends ElementsContainer {
     @FindBy(css = "span#lastWin")
     public SelenideElement lastWinLabel;
 
-    private By reelOne = By.cssSelector("#reel1");
-    private By reelTwo = By.cssSelector("#reel2");
-    private By reelThree = By.cssSelector("#reel3");
+    private By reelOneLocator = By.cssSelector("#reel1");
+    private By reelTwoLocator = By.cssSelector("#reel2");
+    private By reelThreeLocator = By.cssSelector("#reel3");
 
     public List<String> getReelStates() {
-        return new ArrayList<>(Arrays.asList($(reelOne), $(reelTwo), $(reelThree)).stream().map(el -> el.getAttribute("style").replaceAll("\\D+", "")).collect(Collectors.toList()));
+        return new ArrayList<>(Stream.of($(reelOneLocator), $(reelTwoLocator), $(reelThreeLocator)).map(el -> el.getAttribute("style").replaceAll("\\D+", "")).collect(Collectors.toList()));
     }
 }

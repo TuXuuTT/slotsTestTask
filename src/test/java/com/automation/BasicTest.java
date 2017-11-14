@@ -36,7 +36,7 @@ public abstract class BasicTest extends AbstractTestNGCucumberTests implements I
     }
 
     @BeforeClass(alwaysRun = true)
-    public void beforeClass() {
+    public void startUp() {
         setSelenideConfigurations();
         try {
             wd = new BrowserClient().getDriver(EnvironmentConfigurator.getInstance().getBrowserClient());
@@ -48,7 +48,7 @@ public abstract class BasicTest extends AbstractTestNGCucumberTests implements I
     }
 
     @AfterClass(alwaysRun = true)
-    public void afterClass() {
+    public void tierDown() {
         if (wd != null) {
             wd.quit();
         }

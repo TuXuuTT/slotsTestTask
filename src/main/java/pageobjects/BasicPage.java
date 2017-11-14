@@ -50,6 +50,17 @@ public abstract class BasicPage {
         return ((JavascriptExecutor) wd).executeScript(script, params);
     }
 
+    /**
+     * Pause the test to wait for the page to display completely.
+     * This is not normally recommended practice, but is useful from time to time.
+     */
+    public void waitABit(final long delayInMilliseconds) {
+        try {
+            Thread.sleep(delayInMilliseconds);
+        } catch (InterruptedException e) {
+            LOGGER.warn("Wait a bit method was interrupted.", e);
+        }
+    }
 
     protected Map<String, Object> createMapFromTwoLists(List<String> inputKeysList, List inputValuesLists) {
         Map<String, Object> result = new HashMap<>();

@@ -33,20 +33,22 @@ public class OverallSlotMachinesContainer extends ElementsContainer {
         singleSlotsMachineContainer.spinButton.shouldNotHave(Condition.cssClass("disabled"));
     }
 
-    public void storeSlotMachineState(SlotsMachineDTO slotsMachineDTO) {
+    public void setSlotMachineStateSpin(SlotsMachineDTO slotsMachineDTO) {
         slotsMachineDTO.setBet(singleSlotsMachineContainer.currentBetLabel.getText());
         slotsMachineDTO.setLastWin(singleSlotsMachineContainer.lastWinLabel.getText());
         slotsMachineDTO.setTotalSpinsLeft(singleSlotsMachineContainer.totalSpinsLeftlabel.getText());
 
         slotsMachineDTO.setReelsStates(singleSlotsMachineContainer.getReelStates());
+    }
 
+    public void setSlotMachineStateAppearence(SlotsMachineDTO slotsMachineDTO) {
         slotsMachineDTO.setBackgroundViewId(getActiveBackgroundId());
         slotsMachineDTO.setIconsViewId(getActiveIconsViewId());
         slotsMachineDTO.setMachineViewId(getActiveMachineViewId());
     }
 
     private String getActiveBackgroundId() {
-        return String.valueOf($$(backgroundLocator).stream().filter(el -> el.getAttribute("style").contains("display: block")).map(el -> el.getAttribute("data-id")).findFirst());
+        return $$(backgroundLocator).stream().filter(el -> !el.getAttribute("style").contains("display: none")).map(el -> el.getAttribute("data-id")).findFirst().orElseThrow(()-> new IllegalStateException("None background ID is present in HTML code"));
     }
 
     private String getActiveIconsViewId() {

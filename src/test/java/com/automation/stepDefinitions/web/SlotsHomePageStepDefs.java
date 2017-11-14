@@ -10,8 +10,8 @@ import static com.codeborne.selenide.Selenide.page;
 
 public class SlotsHomePageStepDefs {
 
-    static SlotsMachineDTO beforeSpin = new SlotsMachineDTO();
-    static SlotsMachineDTO afterSpin = new SlotsMachineDTO();
+    static SlotsMachineDTO beforeChanges = new SlotsMachineDTO();
+    static SlotsMachineDTO afterChanges = new SlotsMachineDTO();
     SlotsHomePage slotsHomePage = page(SlotsHomePage.class);
 
     @Given("^slots start page is opened$")
@@ -22,31 +22,31 @@ public class SlotsHomePageStepDefs {
 
     @When("^client clicks Spin button$")
     public void clientClicksSpinButton() throws Throwable {
-        slotsHomePage.storeSlotMachineState(beforeSpin);
+        slotsHomePage.storeSlotMachineStateSpin(beforeChanges);
         slotsHomePage.clickSpin();
-        slotsHomePage.storeSlotMachineState(afterSpin);
+        slotsHomePage.storeSlotMachineStateSpin(afterChanges);
     }
 
 
     @When("^client clicks Change Background button$")
     public void clientClicksChangeBackgroundButton() throws Throwable {
-        slotsHomePage.storeSlotMachineState(beforeSpin);
+        slotsHomePage.storeSlotMachineStateAppearence(beforeChanges);
         slotsHomePage.clickChangeBackground();
-        slotsHomePage.storeSlotMachineState(afterSpin);
+        slotsHomePage.storeSlotMachineStateAppearence(afterChanges);
     }
 
 
     @When("^client clicks Change Icons button$")
     public void clientClicksChangeIconsButton() throws Throwable {
-        slotsHomePage.storeSlotMachineState(beforeSpin);
+        slotsHomePage.storeSlotMachineStateAppearence(beforeChanges);
         slotsHomePage.clickChangeIcons();
-        slotsHomePage.storeSlotMachineState(afterSpin);
+        slotsHomePage.storeSlotMachineStateAppearence(afterChanges);
     }
 
     @When("^client clicks Change Machine button$")
     public void clientClicksChangeMachineButton() throws Throwable {
-        slotsHomePage.storeSlotMachineState(beforeSpin);
+        slotsHomePage.storeSlotMachineStateAppearence(beforeChanges);
         slotsHomePage.clickChangeMachine();
-        slotsHomePage.storeSlotMachineState(afterSpin);
+        slotsHomePage.storeSlotMachineStateAppearence(afterChanges);
     }
 }

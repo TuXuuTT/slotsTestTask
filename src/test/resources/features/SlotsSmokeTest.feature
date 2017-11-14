@@ -26,7 +26,10 @@ Feature:
     When client clicks Change Machine button
     Then machine changes
 
-
+  @NewBrowser
+  Scenario:
+    Given slots start page is opened
+    When client
 
 #  @NewBrowser
 #  Scenario:

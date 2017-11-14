@@ -2,8 +2,12 @@ package com.automation.stepDefinitions.web;
 
 import cucumber.api.java.en.Then;
 import org.testng.Assert;
+import pageobjects.SlotsHomePage;
+
+import static com.codeborne.selenide.Selenide.page;
 
 public class SlotsHomePageStepAsserts {
+    SlotsHomePage slotsHomePage = page(SlotsHomePage.class);
 
     @Then("^slot machine is displayed$")
     public void slotMachineAndTryMeButtonAreDisplayed() throws Throwable {
@@ -17,7 +21,7 @@ public class SlotsHomePageStepAsserts {
 
     @Then("^slots are spinned$")
     public void slotsAreSpinned() throws Throwable {
-        Assert.assertNotEquals(beforeSpin.getReelsStates(), afterSpin.getReelsStates());
+        Assert.assertNotEquals(SlotsHomePageStepDefs.beforeChanges.getReelsStates(), SlotsHomePageStepDefs.afterChanges.getReelsStates());
     }
 
     @Then("^Try Me button points to Spin button$")
@@ -37,22 +41,22 @@ public class SlotsHomePageStepAsserts {
 
     @Then("^Total spins amount has changed$")
     public void totalSpinsAmountHasChanged() throws Throwable {
-        Assert.assertNotEquals(beforeSpin.getTotalSpinsLeft(), afterSpin.getTotalSpinsLeft());
+        Assert.assertNotEquals(SlotsHomePageStepDefs.beforeChanges.getTotalSpinsLeft(), SlotsHomePageStepDefs.afterChanges.getTotalSpinsLeft());
     }
 
     @Then("^background changes$")
     public void backgroundChanges() throws Throwable {
-        Assert.assertNotEquals(beforeSpin.getBackgroundViewId(), afterSpin.getBackgroundViewId());
+        Assert.assertNotEquals(SlotsHomePageStepDefs.beforeChanges.getBackgroundViewId(), SlotsHomePageStepDefs.afterChanges.getBackgroundViewId());
     }
 
 
     @Then("^machine changes$")
     public void machineChanges() throws Throwable {
-        Assert.assertNotEquals(beforeSpin.getMachineViewId(), afterSpin.getMachineViewId());
+        Assert.assertNotEquals(SlotsHomePageStepDefs.beforeChanges.getMachineViewId(), SlotsHomePageStepDefs.afterChanges.getMachineViewId());
     }
 
     @Then("^icons change$")
     public void iconsChange() throws Throwable {
-        Assert.assertNotEquals(beforeSpin.getIconsViewId(), afterSpin.getIconsViewId());
+        Assert.assertNotEquals(SlotsHomePageStepDefs.beforeChanges.getIconsViewId(), SlotsHomePageStepDefs.afterChanges.getIconsViewId());
     }
 }

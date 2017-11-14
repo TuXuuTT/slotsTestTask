@@ -12,7 +12,7 @@ public class BlackBarContainer extends ElementsContainer {
     @FindBy(css = "a.btnChangeReels")
     private SelenideElement changeIconsBtn;
 
-    @FindBy(css = "a.btnChangeBackground")
+    @FindBy(css = "a.btnChangeMachine")
     private SelenideElement btnChangeMachine;
 
     public void changeBackground() {

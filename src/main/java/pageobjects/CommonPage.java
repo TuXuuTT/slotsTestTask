@@ -1,7 +1,7 @@
 package pageobjects;
 
+import io.qameta.allure.Step;
 import org.testng.Assert;
-import ru.yandex.qatools.allure.annotations.Step;
 
 public class CommonPage extends BasicPage {
 

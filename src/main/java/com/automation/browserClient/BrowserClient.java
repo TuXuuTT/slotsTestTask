@@ -8,8 +8,8 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -76,6 +76,7 @@ public class BrowserClient {
 
     /**
      * Launches Internet Explorer natively or on the remote machine according to settings
+     * Old fashioned way, need to be refactored according to latest drivers and Selenium changes.
      */
     private RemoteWebDriver startInternetExplorer() throws MalformedURLException {
 
@@ -103,6 +104,7 @@ public class BrowserClient {
 
     /**
      * Launches Chrome natively or on the remote machine according to settings
+     * Old fashioned way, need to be refactored according to latest drivers and Selenium changes.
      */
     private RemoteWebDriver startChrome() throws MalformedURLException {
         OSUtils.killProcess("chromedriver.exe");
@@ -127,9 +129,10 @@ public class BrowserClient {
 
     /**
      * Launches Firefox natively or on the remote machine according to settings
+     * Old fashioned way, need to be refactored according to latest drivers and Selenium changes.
      */
     private RemoteWebDriver startFirefox() throws MalformedURLException {
-        FirefoxBinary fb = new FirefoxBinary();
+//        FirefoxBinary fb = new FirefoxBinary();
 //        fb.setTimeout(SECONDS.toMillis(TIME_WAIT_SECONDS * 2));
         FirefoxProfile profile = new FirefoxProfile();
         if (!environmentConfigurator.isGridUsed()) {
@@ -146,7 +149,6 @@ public class BrowserClient {
                 LOGGER.error("", e);
             }
         }
-        profile.setEnableNativeEvents(false);
         profile.setPreference("dom.successive_dialog_time_limit", 0);
         profile.setPreference("dom.popup_maximum", 200000);
         profile.setPreference("app.update.enabled", false);
@@ -157,7 +159,7 @@ public class BrowserClient {
                 cap.setCapability(FirefoxDriver.PROFILE, profile);
                 this.webDriver = new RemoteWebDriver(new URL("http://" + environmentConfigurator.getSeleniumHub() + "/wd/hub"), cap);
             } else {
-                this.webDriver = new FirefoxDriver(fb, profile);
+                this.webDriver = new FirefoxDriver(new FirefoxOptions().setProfile(profile));
             }
         } catch (WebDriverException e) {
             LOGGER.error("", e);

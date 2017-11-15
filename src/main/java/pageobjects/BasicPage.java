@@ -3,7 +3,6 @@ package pageobjects;
 import com.automation.environment.EnvironmentConfigurator;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
-import com.google.common.base.Predicate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Dimension;
@@ -83,7 +82,7 @@ public abstract class BasicPage {
         FluentWait<WebDriver> wait = new FluentWait<>(driver).withTimeout(timeout, TimeUnit.MILLISECONDS)
                 .pollingEvery(1, TimeUnit.SECONDS);
         final Boolean[] result = {false};
-        wait.until((Predicate<WebDriver>) webDriver -> {
+        wait.until(webDriver -> {
             result[0] = ("complete").equals(executeJS("return document.readyState").toString());
             return result[0];
         });

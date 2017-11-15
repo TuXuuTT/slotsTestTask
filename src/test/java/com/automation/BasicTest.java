@@ -5,6 +5,7 @@ import com.automation.environment.EnvironmentConfigurator;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
+import io.qameta.allure.Attachment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
@@ -16,7 +17,6 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
-import ru.yandex.qatools.allure.annotations.Attachment;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -28,7 +28,7 @@ public abstract class BasicTest extends AbstractTestNGCucumberTests implements I
 
     protected static void setSelenideConfigurations() {
         Configuration.screenshots = false;
-        Configuration.timeout = 20000L;
+        Configuration.timeout = 60000L;
     }
 
     public RemoteWebDriver getPureWdInstance() {

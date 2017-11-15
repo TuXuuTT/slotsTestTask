@@ -59,4 +59,28 @@ public class SlotsHomePageStepDefs {
     public void clientPressArrowToDecreaseBetTimes(int arg0) throws Throwable {
         slotsHomePage.decreaseBetByArrowNthTimes(arg0);
     }
+
+    @When("^client clicks Spin button until win$")
+    public void clientClicksSpinButtonUntilWin() throws Throwable {
+        do {
+            clientClicksSpinButton();
+        } while (!slotsHomePage.isWin() && afterChanges.getTotalSpinsLeft() > afterChanges.getBet());
+    }
+
+    @When("^client clicks Spin button to lose$")
+    public void clientClicksSpinButtonToLose() throws Throwable {
+        do {
+            clientClicksSpinButton();
+        } while (slotsHomePage.isWin() && afterChanges.getTotalSpinsLeft() > afterChanges.getBet());
+    }
+
+    @When("^client clicks Buy Now with Paypal button$")
+    public void clientClicksBuyNowWithPaypalButton() throws Throwable {
+        slotsHomePage.buyWithPayPal();
+    }
+
+    @When("^client clicks Buy Now with Bitcoin button$")
+    public void clientClicksBuyNowWithBitcoinButton() throws Throwable {
+        slotsHomePage.buyWithBitCoin();
+    }
 }

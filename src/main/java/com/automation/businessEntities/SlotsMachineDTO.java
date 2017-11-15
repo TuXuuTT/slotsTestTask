@@ -4,11 +4,11 @@ import java.util.List;
 
 public class SlotsMachineDTO {
 
-    private String lastWin;
+    private int lastWin;
 
-    private String totalSpinsLeft;
+    private int totalSpinsLeft;
 
-    private String bet;
+    private int bet;
 
     private List<String> reelsStates;
 
@@ -16,12 +16,44 @@ public class SlotsMachineDTO {
     private String iconsViewId;
     private String machineViewId;
 
+    public int getLastWin() {
+        return lastWin;
+    }
+
+    public void setLastWin(int lastWin) {
+        this.lastWin = lastWin;
+    }
+
+    public int getTotalSpinsLeft() {
+        return totalSpinsLeft;
+    }
+
+    public void setTotalSpinsLeft(int totalSpinsLeft) {
+        this.totalSpinsLeft = totalSpinsLeft;
+    }
+
+    public int getBet() {
+        return bet;
+    }
+
+    public void setBet(int bet) {
+        this.bet = bet;
+    }
+
+    public List<String> getReelsStates() {
+        return reelsStates;
+    }
+
+    public void setReelsStates(List<String> reelsStates) {
+        this.reelsStates = reelsStates;
+    }
+
     public String getBackgroundViewId() {
         return backgroundViewId;
     }
 
-    public void setBackgroundViewId(String backgroundView) {
-        this.backgroundViewId = backgroundView;
+    public void setBackgroundViewId(String backgroundViewId) {
+        this.backgroundViewId = backgroundViewId;
     }
 
     public String getIconsViewId() {
@@ -40,35 +72,5 @@ public class SlotsMachineDTO {
         this.machineViewId = machineViewId;
     }
 
-    public String getLastWin() {
-        return lastWin;
-    }
 
-    public void setLastWin(String lastWin) {
-        this.lastWin = lastWin;
-    }
-
-    public String getTotalSpinsLeft() {
-        return totalSpinsLeft;
-    }
-
-    public void setTotalSpinsLeft(String totalSpinsLeft) {
-        this.totalSpinsLeft = totalSpinsLeft;
-    }
-
-    public String getBet() {
-        return bet;
-    }
-
-    public void setBet(String bet) {
-        this.bet = bet;
-    }
-
-    public List<String> getReelsStates() {
-        return reelsStates;
-    }
-
-    public void setReelsStates(List<String> reelsStates) {
-        this.reelsStates = reelsStates;
-    }
 }

@@ -5,7 +5,7 @@ import pageobjects.CommonPage;
 
 import static com.codeborne.selenide.Selenide.page;
 
-public class CommonPageStepDefs {
+public class CommonPageStepAsserts {
 
     CommonPage commonPage = page(CommonPage.class);
 

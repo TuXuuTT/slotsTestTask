@@ -23,6 +23,7 @@ public class OverallSlotMachinesContainer extends ElementsContainer {
     @FindBy(css = ".prizes_list_slot_machine")
     private ElementsCollection prizesLists;
 
+    private By wonHighlightedPrizeRowLocator = By.cssSelector(".trPrize.won");
     private By prizeRowLocator = By.cssSelector("span.tdPayout");
 
     private By backgroundLocator = By.cssSelector("div.changeable_background");
@@ -32,8 +33,19 @@ public class OverallSlotMachinesContainer extends ElementsContainer {
         singleSlotsMachineContainer.getSelf().shouldBe(Condition.visible);
     }
 
-    public int getCurrentBet() {
+    public int getCurrentlyDisplayedBet() {
         return Integer.parseInt(singleSlotsMachineContainer.currentBetLabel.getText());
+    }
+
+    public int getCurrentlyDisplayedWin() {
+        if (singleSlotsMachineContainer.lastWinLabel.getText().isEmpty()) {
+            return 0;
+        } else
+            return Integer.parseInt(singleSlotsMachineContainer.lastWinLabel.getText());
+    }
+
+    public int getCurrentlyDisplayedSpinsLeft() {
+        return Integer.parseInt(singleSlotsMachineContainer.totalSpinsLeftlabel.getText());
     }
 
     public void spin() {
@@ -42,9 +54,9 @@ public class OverallSlotMachinesContainer extends ElementsContainer {
     }
 
     public void setSlotMachineStateSpin(SlotsMachineDTO slotsMachineDTO) {
-        slotsMachineDTO.setBet(singleSlotsMachineContainer.currentBetLabel.getText());
-        slotsMachineDTO.setLastWin(singleSlotsMachineContainer.lastWinLabel.getText());
-        slotsMachineDTO.setTotalSpinsLeft(singleSlotsMachineContainer.totalSpinsLeftlabel.getText());
+        slotsMachineDTO.setBet(getCurrentlyDisplayedBet());
+        slotsMachineDTO.setLastWin(getCurrentlyDisplayedWin());
+        slotsMachineDTO.setTotalSpinsLeft(getCurrentlyDisplayedSpinsLeft());
 
         slotsMachineDTO.setReelsStates(singleSlotsMachineContainer.getReelStates());
     }
@@ -87,13 +99,17 @@ public class OverallSlotMachinesContainer extends ElementsContainer {
         }
     }
 
+    public int getHighlightedWonPrizeAmount() {
+        return Integer.parseInt($(wonHighlightedPrizeRowLocator).shouldBe(Condition.visible).$(prizeRowLocator).getText());
+    }
+
     public Boolean isWinChartDisplaysMultipliedWinPoints() {
         boolean result = false;
         ElementsCollection visibleCurrentPrizeRows = prizesLists.filterBy(Condition.visible).shouldHaveSize(1).first().$$(prizeRowLocator);
         List<Integer> defaultBasePrizes = visibleCurrentPrizeRows.stream().map(el -> (int) Double.parseDouble(el.getAttribute("data-basepayout"))).collect(Collectors.toList());
         List<Integer> actualPrizes = visibleCurrentPrizeRows.stream().map(el -> Integer.parseInt(el.getText())).collect(Collectors.toList());
 
-        int bet = Integer.parseInt(singleSlotsMachineContainer.currentBetLabel.getText());
+        int bet = getCurrentlyDisplayedBet();
         List<Integer> multipliedDefaultPrizes = defaultBasePrizes.stream().map(l -> l * bet).collect(Collectors.toList());
 
         if (multipliedDefaultPrizes.equals(actualPrizes)) {

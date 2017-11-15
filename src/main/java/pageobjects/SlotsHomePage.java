@@ -19,6 +19,12 @@ public class SlotsHomePage extends BasicPage {
     @FindBy(css = "div#SlotsOuterContainer.won")
     private SelenideElement redWinBackgroundLabel;
 
+    @FindBy(css = "form[action='https://www.paypal.com/cgi-bin/webscr']")
+    private SelenideElement buyPayPalBtn;
+
+    @FindBy(css = "form[action='https://bitpay.com/checkout']")
+    private SelenideElement buyBitcoinBtn;
+
     private By tryMeButtonLocator = By.cssSelector("#tryMe");
 
     public void verifySlotMachineDisplayed() {
@@ -26,7 +32,7 @@ public class SlotsHomePage extends BasicPage {
     }
 
     public int getCurrentBet() {
-        return overallSlotMachinesContainer.getCurrentBet();
+        return overallSlotMachinesContainer.getCurrentlyDisplayedBet();
     }
 
     public void clickSpin() {
@@ -82,5 +88,39 @@ public class SlotsHomePage extends BasicPage {
 
     public boolean isWinChartDisplaysMultipliedWinPoints() {
         return overallSlotMachinesContainer.isWinChartDisplaysMultipliedWinPoints();
+    }
+
+
+    public boolean isWin() {
+        return redWinBackgroundLabel.is(Condition.visible);
+    }
+
+    public boolean isLastWinFieldDisplaysEqualsHighlightedPrizeRow() {
+        return overallSlotMachinesContainer.getCurrentlyDisplayedWin() == overallSlotMachinesContainer.getHighlightedWonPrizeAmount();
+    }
+
+    public boolean isTotalSpinsAmountChangedAccordinglyToBetIfWinOrLose(SlotsMachineDTO beforeChanges, SlotsMachineDTO afterChanges) {
+        boolean result;
+        int before = beforeChanges.getTotalSpinsLeft();
+        int after = afterChanges.getTotalSpinsLeft();
+        if (isWin()) {
+            int expectedCalculatedAfter = (before - getCurrentBet()) + overallSlotMachinesContainer.getHighlightedWonPrizeAmount();
+            result = after == expectedCalculatedAfter;
+        } else {
+            int expectedCalculatedAfter = (before - getCurrentBet());
+            result = after == expectedCalculatedAfter;
+        }
+
+        return result;
+    }
+
+    public void buyWithPayPal() {
+        buyPayPalBtn.click();
+        waitForPageToLoad(10000);
+    }
+
+    public void buyWithBitCoin() {
+        buyBitcoinBtn.click();
+        waitForPageToLoad(10000);
     }
 }

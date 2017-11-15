@@ -3,16 +3,19 @@ package pageobjects;
 import com.automation.environment.EnvironmentConfigurator;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
+import com.google.common.base.Predicate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.FluentWait;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 
 public abstract class BasicPage {
@@ -70,5 +73,19 @@ public abstract class BasicPage {
             }
         } else throw new IllegalArgumentException("Cannot map lists with different sizes");
         return result;
+    }
+
+    public void waitForPageToLoad(final long milliseconds) {
+        waitForPageToLoad(getWebDriverCurrent(), milliseconds);
+    }
+
+    private void waitForPageToLoad(final WebDriver driver, final long timeout) {
+        FluentWait<WebDriver> wait = new FluentWait<>(driver).withTimeout(timeout, TimeUnit.MILLISECONDS)
+                .pollingEvery(1, TimeUnit.SECONDS);
+        final Boolean[] result = {false};
+        wait.until((Predicate<WebDriver>) webDriver -> {
+            result[0] = ("complete").equals(executeJS("return document.readyState").toString());
+            return result[0];
+        });
     }
 }

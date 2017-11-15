@@ -25,6 +25,7 @@ target/
 .gradle/
 gradle
 build
+allure-results/
 
 # Screenshots
 .png

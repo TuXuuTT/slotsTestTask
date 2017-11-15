@@ -1,13 +1,13 @@
-The project is written usinh Java + Selenium(Selenide) + Cucumber(BDD) stack.
+The project is written using _Java + Selenium(Selenide) + Cucumber(BDD)_ stack.
 Test code is self-documented, trying to follow best practices of usage of PageObject pattern. Although 'Selenide' library makes it even more simple. It should be easy to read existing code and extend it to increase test coverage.
 
 To simply run test suite just execute maven goal:
 
-mvn clean test
+`mvn clean test`
 
-If running from IDE, please use for your run configuration testng_dflt.xml suite file or TestSlotsSmokeTestRunner from "com.automation.testCucmbrRunners.web" folder.
+If running from IDE, please use for your run configuration _testng_dflt.xml_ suite file or _TestSlotsSmokeTestRunner_ from _"com.automation.testCucmbrRunners.web"_ folder.
 
-Do not use direct run configuration against feature file, because it will not apply predefined parameters for webDriver launch from BasicTest.java class.
+Do not use direct run configuration against feature file, because it will not apply predefined parameters for webDriver launch from _BasicTest.java_ class.
 In any case, one runner corresponds exactly to one feature file, so this should not make any inconvenience :)
 
 #### Notes:

@@ -40,6 +40,7 @@ Feature:
   Scenario: Verify client cant increase bet higher than 10
     When client press arrow to increase bet 4 times
     Then current bet equals 10
+    And win chart shows updated multiplies by current bet amount
 
   Scenario: Verify client can decrease bet and multiplier changes accordingly
     When client press arrow to decrease bet 6 times
